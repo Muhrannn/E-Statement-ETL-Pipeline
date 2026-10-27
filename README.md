@@ -133,7 +133,7 @@ Configure the connection using the host, port, username, and password specified 
 
 For a PostgreSQL container that publishes port `5433` to the host, use the following settings when connecting from DBeaver running directly on the local computer:
 
-- **Host:** `localhost`
+- **Host:** `'host.docker.internal'`
 - **Port:** `5433`
 - **Username:** The configured PostgreSQL username
 - **Password:** The configured PostgreSQL password
