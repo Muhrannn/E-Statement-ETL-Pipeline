@@ -1,4 +1,4 @@
-# E-Statement Data Engineering Pipeline
+# E-Statement-ETL-Pipeline
 
 An automated ETL pipeline for processing e-statement transaction data using Python, Apache Airflow, PostgreSQL, and Docker. This project implements the Medallion Architecture to organize data processing from raw ingestion to analytical data modeling.
 
