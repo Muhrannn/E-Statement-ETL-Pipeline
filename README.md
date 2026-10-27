@@ -94,31 +94,22 @@ Database creation and table definitions are provided in the `sql/` directory.
 
 ### 1. Clone the Repository
 
+Clone the repository and navigate to the project directory:
+
 ```bash
 git clone https://github.com/Muhrannn/E-Statement-Data-Engineering-Pipeline.git
 cd E-Statement-Data-Engineering-Pipeline
 ```
 
-### 2. Configure Environment Variables
+### 2. Configure Docker Compose Paths
 
-Create a local `db.env` file based on `.env.example` in folder scripts/.
+Open `docker-compose.yaml` in a code editor.
 
-Configure the database host, port, username, password, and database names. Do not commit `db.env` or other files containing credentials.
+Locate the volume path configuration marked with `# Change the path here` and adjust the local paths to match the project directory on your computer.
 
-### 3. Create the Databases and Tables
+Make sure the paths for the DAGs, scripts, and other required files point to the correct local directories. Save the file after making the necessary changes.
 
-1. Connect to the PostgreSQL server using DBeaver or another PostgreSQL client.
-
-2. Execute sql/00_database.sql to create the Bronze, Silver, and Gold databases. The database user must have the required privileges.
-
-3. Open a SQL Editor connected to each database and execute its corresponding DDL file:
-- sql/01_bronze_ddl.sql in the Bronze database.
-- sql/02_silver_ddl.sql in the Silver database.
-- sql/03_gold_ddl.sql in the Gold database.
-
-4. Verify that the tables have been created successfully before running the Airflow pipeline.
-
-### 4. Start Docker Services
+### 3. Start Docker Services
 
 From the project root directory, run:
 
@@ -132,7 +123,46 @@ Verify that the required containers are running:
 docker compose ps
 ```
 
-### 5. Run the ETL Pipeline
+Make sure the PostgreSQL, Airflow, and other required services are running before proceeding.
+
+### 4. Connect to PostgreSQL Using DBeaver Community
+
+Open DBeaver Community and create a new PostgreSQL connection.
+
+Configure the connection using the host, port, username, and password specified in `docker-compose.yaml`.
+
+For a PostgreSQL container that publishes port `5433` to the host, use the following settings when connecting from DBeaver running directly on the local computer:
+
+- **Host:** `localhost`
+- **Port:** `5433`
+- **Username:** The configured PostgreSQL username
+- **Password:** The configured PostgreSQL password
+
+If PostgreSQL runs on another machine or a managed cloud service, use the host address and port provided by that service instead.
+
+Click **Test Connection** to verify the connection.
+
+### 5. Create the Databases and Tables
+
+1. Connect to the PostgreSQL server using DBeaver.
+2. Execute `sql/00_database.sql` to create the Bronze, Silver, and Gold databases. The database user must have the required privileges.
+3. Open a SQL Editor connected to each database and execute its corresponding DDL file:
+   - `sql/01_bronze_ddl.sql` in the Bronze database.
+   - `sql/02_silver_ddl.sql` in the Silver database.
+   - `sql/03_gold_ddl.sql` in the Gold database.
+4. Verify that the tables have been created successfully before running the Airflow pipeline.
+
+### 6. Configure Environment Variables
+
+Create a local `db.env` file in the `scripts/` directory using `.env.example` as a reference.
+
+Configure the database host, port, username, password, and database names according to your PostgreSQL setup.
+
+Use the appropriate hostname for the environment where the ETL scripts run. For example, `host.docker.internal` can be used by a container to access a service running on the host computer. If PostgreSQL runs as another service within the same Docker Compose network, use its service name and internal port instead.
+
+Do not commit `db.env` or any other file containing credentials.
+
+### 7. Run the ETL Pipeline
 
 1. Open the Airflow web interface using the URL and port configured in `docker-compose.yaml`.
 2. Enable the ETL DAG if it is paused.
