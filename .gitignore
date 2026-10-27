@@ -1,0 +1,30 @@
+# Environment and credentials
+db.env
+.env
+.env.*
+!.env.example
+
+# Exclude all notebooks and their contents
+notebooks/
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# macOS
+.DS_Store
+.DS_Store
+
+# Logs
+logs/
+
+# Local data and database backups
+*.xlsx
+*.csv
+*.parquet
+*.dump
+*.backup

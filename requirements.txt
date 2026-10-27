@@ -1,0 +1,14 @@
+pandas==2.2.2
+numpy==1.26.4
+
+ydata-profiling
+
+sqlalchemy==2.0.30
+psycopg2-binary==2.9.9
+
+jupyter
+notebook
+ipykernel
+
+apache-airflow-providers-postgres
+pyspark==3.5.6

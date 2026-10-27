@@ -1,0 +1,3 @@
+CREATE DATABASE brz_bank_transaction;
+CREATE DATABASE slv_bank_transaction;
+CREATE DATABASE gld_bank_transaction;
